@@ -3,21 +3,26 @@ import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const COLOURS = ["green", "red", "blue", "yellow"];
+
 function App() {
-  const COLOURS = ["green", "red", "blue"];
-  //const [colour, setColour] = useState("green");
-  const [count, setCount] = useState(0);
+  const [values, setValues] = useState({
+    count: 0,
+  });
+  const s = {backgroundColor: `${COLOURS[values.count]}`};
   useEffect(() => {
-      setInterval(() => {
-        //setCount(count > COLOURS.length-1 ? 0 : count+1);
-        setCount(count => (count + 1))
-        console.log(count);
-      }, 3000);
-  }, []);
+    setInterval(() => {
+      setValues(prevState => ({count: prevState.count >= COLOURS.length - 1 ? 0 : prevState.count + 1}))
+    }, 50);
+  }, [setValues]);
+
   return (
-    <div className="App" style = {{backgroundColor:COLOURS[count]}}>
+    <div
+      className="App"
+      style={s}
+    >
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo"/>
         <p>
           This is a webpage for CMK Jewellery
         </p>
@@ -30,18 +35,18 @@ function App() {
           Website
         </a>
         <a
-            className="App-link"
-            href="https://www.instagram.com/cmkjewellery/?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
+          className="App-link"
+          href="https://www.instagram.com/cmkjewellery/?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Instagram
         </a>
         <a
-            className="App-link"
-            href="https://ncad.works/graduates/clodagh-mckenna"
-            target="_blank"
-            rel="noopener noreferrer"
+          className="App-link"
+          href="https://ncad.works/graduates/clodagh-mckenna"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           NCAD Graduate Show
         </a>
